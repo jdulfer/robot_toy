@@ -2,40 +2,43 @@ from table import Table
 import fileinput
 import sys
 
-table = Table()
+class Driver:
+    def __init__(self):
+        self.table = Table()
+        Driver.direction_dict = {
+        "NORTH": 0,
+        "EAST": 1,
+        "SOUTH": 2,
+        "WEST": 3
+        }
 
-direction_dict = {
-    "NORTH": 0,
-    "EAST": 1,
-    "SOUTH": 2,
-    "WEST": 3
-}
+    def process(self, line):
+        instruction = line.split()
+        if instruction[0] == "PLACE":
+            coordinates = instruction[1].split(",")
+            x = int(coordinates[0])
+            y = int(coordinates[1])
+            f = Driver.direction_dict[coordinates[2]]
+            self.table.place_robot(x,y,f)
+        elif instruction[0] == "MOVE":
+            self.table.robots[self.table.active_robot].move()
+        elif instruction[0] == "RIGHT":
+            self.table.robots[self.table.active_robot].right()
+        elif instruction[0] == "LEFT":
+            self.table.robots[self.table.active_robot].left()
+        elif instruction[0] == "REPORT":
+            self.table.report()
+        elif instruction[0] == "ROBOT":
+            # ideally this should be set through the table class with a setter as opposed to directly changed by the driver
+            self.table.active_robot = int(instruction[1]) - 1
+        else:
+            raise ValueError("Invalid instruction")
 
-def process(line):
-    instruction = line.split()
-    if instruction[0] == "PLACE":
-        coordinates = instruction[1].split(",")
-        x = int(coordinates[0])
-        y = int(coordinates[1])
-        f = direction_dict[coordinates[2]]
-        table.place_robot(x,y,f)
-    elif instruction[0] == "MOVE":
-        table.robots[table.active_robot].move()
-    elif instruction[0] == "RIGHT":
-        table.robots[table.active_robot].right()
-    elif instruction[0] == "LEFT":
-        table.robots[table.active_robot].left()
-    elif instruction[0] == "REPORT":
-        table.report()
-    elif instruction[0] == "ROBOT":
-        # ideally this should be set through the table class with a setter as opposed to directly changed by the driver
-        table.active_robot = int(instruction[1]) - 1
+if __name__ == "__main__":
+    driver = Driver()
+    if len(sys.argv) == 1:
+        for line in fileinput.input():
+            driver.process(line)
     else:
-        raise ValueError("Invalid instruction")
-        
-if len(sys.argv) == 1:
-    for line in fileinput.input():
-        process(line)
-else:
-    for line in fileinput.input(files = sys.argv[1]):
-        process(line)
+        for line in fileinput.input(files = sys.argv[1]):
+            driver.process(line)
