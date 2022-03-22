@@ -1,0 +1,25 @@
+This is the expected output for the test_instructions. I decided to not implement all of this
+as a unit test as a) that was outside scope and b) this way you can easily modify the test test_instructions
+without modifying the unit tests.
+
+FIRST REPORT:
+Robot number 1's location is: [0,1,NORTH]
+SECOND REPORT:
+Robot number 1's location is: [0,1,NORTH]
+Robot number 2's location is: [0,0,WEST]
+THIRD REPORT:
+Robot number 1's location is: [0,1,NORTH]
+Robot number 2's location is: [0,0,WEST]
+Robot number 3's location is: [3,3,NORTH]
+FOURTH REPORT (This report shouldn't change as I'm testing that the robot is ignoring invalid move commands):
+Robot number 1's location is: [0,1,NORTH]
+Robot number 2's location is: [0,0,WEST]
+Robot number 3's location is: [3,3,NORTH]
+FIFTH REPORT:
+Robot number 1's location is: [0,1,NORTH]
+Robot number 2's location is: [3,0,WEST]
+Robot number 3's location is: [3,3,NORTH]
+SIXTH REPORT (Test that the driver shouldn't place another robot if it is at an invalid location):
+Robot number 1's location is: [0,1,NORTH]
+Robot number 2's location is: [3,0,WEST]
+Robot number 3's location is: [3,3,NORTH]

@@ -30,6 +30,8 @@ def process(line):
     elif instruction[0] == "ROBOT":
         # ideally this should be set through the table class as opposed to directly changed by the driver
         table.active_robot = int(instruction[1]) - 1
+    else:
+        raise ValueError("Invalid instruction")
         
 if len(sys.argv) == 1:
     for line in fileinput.input():
