@@ -1,28 +1,33 @@
 from table import Table
+import fileinput
 
 table = Table()
-table.place_robot(0,0,0)
-table.place_robot(1,1,1)
-table.place_robot(4,4,1)
-table.place_robot(5,5,1)
-table.report()
 
-print("-"*100)
+direction_dict = {
+    "NORTH": 0,
+    "EAST": 1,
+    "SOUTH": 2,
+    "WEST": 3
+}
 
-table.robots[0].move()
-table.report()
+def process(line):
+    instruction = line.split()
+    if instruction[0] == "PLACE":
+        coordinates = instruction[1].split(",")
+        x = int(coordinates[0])
+        y = int(coordinates[1])
+        f = direction_dict[coordinates[2]]
+        print(x,y,f)
+        table.place_robot(x,y,f)
+    elif instruction[0] == "MOVE":
+        table.robots[0].move()
+    elif instruction[0] == "RIGHT":
+        table.robots[0].right()
+    elif instruction[0] == "LEFT":
+        table.robots[0].left()
+    elif instruction[0] == "REPORT":
+        table.report()
+        
 
-print("-"*100)
-
-table.robots[0].right()
-table.robots[0].move()
-table.robots[0].move()
-table.report()
-
-print("-"*100)
-
-table.robots[0].move()
-table.robots[0].move()
-# this move is invalid
-table.robots[0].move()
-table.report()
+for line in fileinput.input(files = 'instructions.txt'):
+    process(line)
