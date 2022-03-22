@@ -20,9 +20,9 @@ class Robot:
 
     def move(self):
         # currently this method just opts to ignore invalid move instructions rather than raising an error
-        if self.f == 0 and self.x < 3:
+        if self.f == 0 and self.x < 4:
             self.x += 1
-        elif self.f == 1 and self.y < 3:
+        elif self.f == 1 and self.y < 4:
             self.y += 1
         elif self.f == 2 and self.x > 0:
             self.x -= 1
