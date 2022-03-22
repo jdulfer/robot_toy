@@ -1,6 +1,6 @@
 class Robot:
     def __init__(self, x, y, f):
-        # need to validate that the placement location is valid
+        # validate that the placement location is valid
         if x < 0 or x > 4:
             raise ValueError("x must be between 0 and 4")
         if y < 0 or y > 4:
@@ -10,8 +10,7 @@ class Robot:
         self.y = y
         self.f = f
 
-        # this could probably live on the table rather than the robot but I have it here for simplicity
-        self.direction_dict = {
+        Robot.direction_dict = {
             0: "NORTH",
             1: "EAST",
             2: "SOUTH",
@@ -44,4 +43,4 @@ class Robot:
 
     def report(self, number):
         # might need to simplify this report function so it plays nice with any exterior testing
-        print(f"Robot number {number}'s location is:", [self.x, self.y, self.direction_dict[self.f]])
+        print(f"Robot number {number}'s location is:", [self.x, self.y, Robot.direction_dict[self.f]])

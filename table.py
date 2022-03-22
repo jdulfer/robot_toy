@@ -11,13 +11,18 @@ class Table:
             self.robots.append(Robot(x,y,f))
             self.active_robot = len(self.robots) - 1
         except ValueError as e:
-            # might need to get rid of the value messages in favour of ignoring them
+            # I'm not displaying the ValueError messages in favour of ignoring them
+            # but I have the code I was using during testing commented below
+            
             # print("Invalid placement value")
             # print(e)
             pass
 
     def report(self):
-        print(f"There are {len(self.robots)} robots active")
+        if len(self.robots) == 1:
+            print(f"There is 1 robot active")
+        else:
+            print(f"There are {len(self.robots)} robots active")
         print(f"Current active robot is {self.active_robot + 1}")
         robot_number = 1
         for robot in self.robots:
