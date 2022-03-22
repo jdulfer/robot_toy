@@ -20,13 +20,16 @@ def process(line):
         f = direction_dict[coordinates[2]]
         table.place_robot(x,y,f)
     elif instruction[0] == "MOVE":
-        table.robots[0].move()
+        table.robots[table.active_robot].move()
     elif instruction[0] == "RIGHT":
-        table.robots[0].right()
+        table.robots[table.active_robot].right()
     elif instruction[0] == "LEFT":
-        table.robots[0].left()
+        table.robots[table.active_robot].left()
     elif instruction[0] == "REPORT":
         table.report()
+    elif instruction[0] == "ROBOT":
+        # ideally this should be set through the table class as opposed to directly changed by the driver
+        table.active_robot = int(instruction[1]) - 1
         
 if len(sys.argv) == 1:
     for line in fileinput.input():
