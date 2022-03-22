@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from robot import Robot
 
 class Table:
@@ -5,7 +6,12 @@ class Table:
         self.robots = []
 
     def place_robot(self, x, y, f):
-        self.robots.append(Robot(x,y,f))
+        try:
+            self.robots.append(Robot(x,y,f))
+        except ValueError as e:
+            # might need to get rid of the value messages in favour of ignoring them
+            print("Invalid placement value")
+            print(e)
 
     def report(self):
         robot_number = 1
