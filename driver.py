@@ -1,5 +1,6 @@
 from table import Table
 import fileinput
+import sys
 
 table = Table()
 
@@ -17,7 +18,6 @@ def process(line):
         x = int(coordinates[0])
         y = int(coordinates[1])
         f = direction_dict[coordinates[2]]
-        print(x,y,f)
         table.place_robot(x,y,f)
     elif instruction[0] == "MOVE":
         table.robots[0].move()
@@ -28,6 +28,9 @@ def process(line):
     elif instruction[0] == "REPORT":
         table.report()
         
-
-for line in fileinput.input(files = 'instructions.txt'):
-    process(line)
+if len(sys.argv) == 1:
+    for line in fileinput.input():
+        process(line)
+else:
+    for line in fileinput.input(files = sys.argv[1]):
+        process(line)

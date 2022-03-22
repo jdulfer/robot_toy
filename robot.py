@@ -20,14 +20,15 @@ class Robot:
 
     def move(self):
         # currently this method just opts to ignore invalid move instructions rather than raising an error
-        if self.f == 0 and self.x < 4:
-            self.x += 1
-        elif self.f == 1 and self.y < 4:
+        # could instead have a property decorator on the x y and f values to raise errors properly
+        if self.f == 0 and self.y < 4:
             self.y += 1
-        elif self.f == 2 and self.x > 0:
-            self.x -= 1
-        elif self.f == 3 and self.y > 0:
+        elif self.f == 1 and self.x < 4:
+            self.x += 1
+        elif self.f == 2 and self.y > 0:
             self.y -= 1
+        elif self.f == 3 and self.x > 0:
+            self.x -= 1
 
     def left(self):
         if self.f == 0:
